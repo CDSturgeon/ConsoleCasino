@@ -12,8 +12,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Craps\" />
+    <None Remove="Blackjack\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Craps\" />
+    <Folder Include="Blackjack\" />
   </ItemGroup>
 </Project>

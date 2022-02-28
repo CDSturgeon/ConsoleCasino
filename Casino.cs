@@ -1,45 +1,48 @@
 ﻿using System;
 using CodeLouisvilleLibrary;
 using ConsoleCasino.Craps;
+using ConsoleCasino.Blackjack;
 
 namespace ConsoleCasino
 {
     public class Casino : CodeLouisvilleAppBase
     {
-        public Casino():base ("Console Casino") { }
+        public Casino():base ("the Console Casino") { }
 
         protected override bool Main()
         {
-            var menu = new Menu();
-            menu.AddMenuItem("1", "Craps");
-            menu.AddMenuItem("Q", "Quit");
+            var menu = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("1", "Craps"),
+                new KeyValuePair<string, string>("2", "Blackjack"),
+                new KeyValuePair<string, string>("Q", "Quit")
+            };
 
-            string userSelection = Prompt4MenuItem("Select an option", menu);
+            string userSelection = Prompt4MenuItem<string>("Select an option", menu);
 
-            Console.WriteLine($"You picked option {userSelection}");
-
-            switch(userSelection)
+            switch (userSelection)
             {
                 case "1":
-                    //var rolldie = new Random();
-                    //int die1 = rolldie.Next(6) + 1;
-                    //int die2 = rolldie.Next(6) + 1;
+                    var craps = new CrapsTable();
+                    craps.Run();
+                    Wait();
+                    return true;
 
-                    var allDice = new Dice();
-                    allDice.RollDice();
+                case "2":
+                    var blackjack = new BlackjackTable();
+                    blackjack.Run();
+                    Wait();
+                    return true;
 
-                    for (int i = 0;i<allDice.dice.Length;i++)
-                        Console.WriteLine($"Die{i+1}: {allDice.dice[i]}");
-                    //Console.WriteLine($"You rolled {die1} and {die2}");
-                    break;
+                case "Q":
+                    return false;
 
                 case null:
-                    break;
+                    Console.WriteLine("Invalid selection.");
+                    return true;
             }
-                
-            return Prompt4YesNo("Do you want to go again? ");
-        }
 
+            return Prompt4YesNo("Do you want to go again? (Y/N): ");
+        }
     }
 }
-
