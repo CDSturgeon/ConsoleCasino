@@ -22,12 +22,8 @@ namespace ConsoleCasino.Craps
             {
                 case "S":
 
-                    //SelectDice();
-                    //var allDice = new Dice();
-                    //allDice.RollDice();
-
-                    //for (int i = 0; i < allDice.dice.Length; i++)
-                    //    Console.WriteLine($"Die{i + 1}: {allDice.dice[i]}");
+                    var dice = new Dice();
+                    int[] shooterDice = dice.NewShooter();
                     break;
 
                 case "P":
@@ -35,5 +31,7 @@ namespace ConsoleCasino.Craps
             }
             return false;
         }
+
+
     }
 }
